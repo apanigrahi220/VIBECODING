@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Co-Curricular | Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .activity-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .role-badge {
+            background: var(--grad-primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar injected by main.js -->
+
+        <main class="main-content">
+            <!-- Header injected by main.js -->
+
+            <h2 class="fade-in">Co-Curricular & Sports</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Track your clubs, sports, and achievements beyond
+                the classroom.</p>
+
+            <div class="dashboard-grid">
+
+                <!-- Clubs Section -->
+                <div style="grid-column: span 2;">
+                    <h3 style="margin-bottom: 1rem;">Joined Clubs & Societies</h3>
+                    <div class="activity-grid" id="club-list">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+
+                <!-- Achievements Column -->
+                <div class="card" style="grid-row: span 2;">
+                    <h3>🏆 Achievements</h3>
+                    <div id="achievement-list"
+                        style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+
+                <!-- Sports Section -->
+                <div style="grid-column: span 2;">
+                    <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Sports & Athletics</h3>
+                    <div class="activity-grid" id="sports-list">
+                        <!-- JS Injected -->
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = window.StudentData.coCurricular;
+
+            // Render Clubs
+            const clubContainer = document.getElementById('club-list');
+            data.clubs.forEach(c => {
+                clubContainer.innerHTML += `
+                    <div class="activity-card">
+                        <div class="role-badge">${c.role}</div>
+                        <h4 style="font-size: 1.2rem;">${c.name}</h4>
+                        <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Member since ${c.since}</div>
+                    </div>
+                `;
+            });
+
+            // Render Sports
+            const sportsContainer = document.getElementById('sports-list');
+            data.sports.forEach(s => {
+                sportsContainer.innerHTML += `
+                    <div class="activity-card" style="border-left: 4px solid var(--color-accent-green);">
+                        <div class="role-badge" style="background: var(--color-accent-green);">${s.role}</div>
+                        <h4 style="font-size: 1.2rem;">${s.name}</h4>
+                        <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                            <strong>Achievement:</strong> ${s.achievements}
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Render Achievements
+            const achContainer = document.getElementById('achievement-list');
+            data.achievements.forEach(a => {
+                achContainer.innerHTML += `
+                    <div style="display: flex; gap: 1rem; align-items: start;">
+                        <div style="font-size: 1.5rem;">🥇</div>
+                        <div>
+                            <div style="font-weight: 600;">${a.title}</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">${a.date} • ${a.desc}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance | Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar injected by main.js -->
+
+        <main class="main-content">
+            <!-- Header injected by main.js -->
+
+            <h2 class="fade-in">Detailed Attendance</h2>
+
+            <div class="card table-container fade-in" style="margin-top: var(--space-md);">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject Code</th>
+                            <th>Subject Name</th>
+                            <th>Attended / Total</th>
+                            <th>Percentage</th>
+                            <th>Status</th>
+                            <th>Prediction</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendance-body">
+                        <!-- JS injected -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="dashboard-grid" style="margin-top: var(--space-lg);">
+                <div class="card">
+                    <h3>Attendance Legend</h3>
+                    <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <div style="display: items-center; gap: 10px;">
+                            <span class="badge badge-green">Safe (75%+)</span> No action needed.
+                        </div>
+                        <div style="display: items-center; gap: 10px;">
+                            <span class="badge badge-yellow">Warning (60-74%)</span> Be careful.
+                        </div>
+                        <div style="display: items-center; gap: 10px;">
+                            <span class="badge badge-red">Critical (<60%)< /span> Attend immediately.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/attendance.js"></script>
+</body>
+
+</html>

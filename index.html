@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar injected by main.js -->
+
+        <main class="main-content">
+            <!-- Header injected by main.js -->
+
+            <div class="dashboard-grid">
+                <!-- Attendance Summary -->
+                <div class="card action-card">
+                    <div class="stat-card">
+                        <div class="stat-label">Avg. Attendance</div>
+                        <div class="stat-value" id="avg-attendance">--%</div>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="avg-attendance-bar" style="width: 0%"></div>
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"
+                            id="attendance-msg">
+                            Loading...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SGPA Summary -->
+                <div class="card action-card">
+                    <div class="stat-card">
+                        <div class="stat-label">Latest Semester SGPA</div>
+                        <div class="stat-value" id="latest-sgpa">--</div>
+                        <div style="margin-top: 10px; display: flex; align-items: center; gap: 5px;">
+                            <span class="badge badge-green" id="sgpa-trend">Steady</span>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">vs previous sem</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions / Alerts -->
+                <div class="card"
+                    style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light)); color: white;">
+                    <div class="stat-card">
+                        <div class="stat-label" style="color: rgba(255,255,255,0.8);">Next Class</div>
+                        <div class="stat-value" style="color: white; font-size: 1.5rem; margin-top: 5px;">Data
+                            Structures</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9; margin-top: 5px;">
+                            ⏰ 10:30 AM • Room 302
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-lg); margin-top: var(--space-lg);">
+
+                <!-- Main Column -->
+                <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+
+                    <!-- Charts Row -->
+                    <div class="card" style="padding-bottom: 0px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>Academic Journey (Sem 1-8)</h3>
+                            <select style="border: none; background: #f0f0f0; padding: 5px 10px; border-radius: 8px;">
+                                <option>All Time</option>
+                            </select>
+                        </div>
+                        <div style="height: 300px; margin-top: 1rem; position: relative;">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Two-Col Row for Pie Chart and Goals -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+                        <!-- Attendance Pie -->
+                        <div class="card">
+                            <h3>Attendance Health</h3>
+                            <div style="height: 200px; position: relative;">
+                                <canvas id="attendancePieChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Goal Tracker -->
+                        <div class="card" style="background: linear-gradient(180deg, #fff 0%, #f9fafb 100%);">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h3>🎯 Goal Tracker</h3>
+                                <button
+                                    style="font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; border: 1px solid #ddd; background: white; cursor: pointer;">+
+                                    Add</button>
+                            </div>
+                            <div id="goal-list"
+                                style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+                                <!-- Filled by JS -->
+                                <div style="color:var(--text-muted);">Loading Goals...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Side Column -->
+                <div class="card" style="overflow-y: auto; max-height: 800px;">
+                    <h3>Events & Timeline</h3>
+                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column;">
+
+                        <div class="event-item">
+                            <div class="date-badge">
+                                <span>Feb</span>
+                                <strong>15</strong>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600;">Mid-Semester Exams</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top:2px;">
+                                    Block A • Mandatory
+                                </div>
+                                <span class="badge badge-red" style="margin-top: 5px;">Critical</span>
+                            </div>
+                        </div>
+
+                        <div class="event-item">
+                            <div class="date-badge" style="background: var(--grad-gold); color: var(--text-main);">
+                                <span>Feb</span>
+                                <strong>28</strong>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600;">Tech Fest '26</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top:2px;">
+                                    Main Auditorium
+                                </div>
+                                <span class="badge badge-green" style="margin-top: 5px;">Event</span>
+                            </div>
+                        </div>
+
+                        <div class="event-item">
+                            <div class="date-badge" style="background: #e5e7eb; color: #374151;">
+                                <span>Mar</span>
+                                <strong>10</strong>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600;">Project Submission</div>
+                                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top:2px;">
+                                    Online Portal
+                                </div>
+                                <span class="badge badge-yellow" style="margin-top: 5px;">Deadline</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

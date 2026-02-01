@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Schedule | Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .timeline-container {
+            position: relative;
+            padding-left: 3rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -3.4rem;
+            top: 1.5rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 2px var(--color-primary);
+        }
+
+        .type-Exam .timeline-dot {
+            background: var(--color-accent-red);
+            box-shadow: 0 0 0 2px var(--color-accent-red);
+        }
+
+        .type-Deadline .timeline-dot {
+            background: var(--color-accent-yellow);
+            box-shadow: 0 0 0 2px var(--color-accent-yellow);
+        }
+
+        .type-Event .timeline-dot {
+            background: var(--color-accent-green);
+            box-shadow: 0 0 0 2px var(--color-accent-green);
+        }
+
+        /* New Types */
+        .type-Holiday .timeline-dot {
+            background: #ff4081;
+            box-shadow: 0 0 0 2px #ff4081;
+        }
+
+        .type-Sports .timeline-dot {
+            background: #ff9800;
+            box-shadow: 0 0 0 2px #ff9800;
+        }
+
+        .type-Activity .timeline-dot {
+            background: #9c27b0;
+            box-shadow: 0 0 0 2px #9c27b0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar injected by main.js -->
+
+        <main class="main-content">
+            <!-- Header injected by main.js -->
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="fade-in">Term Calendar & Events</h2>
+                <div class="fade-in" style="display: flex; gap: 10px;">
+                    <span class="badge" style="background: rgba(255,255,255,0.2);">🟢 Events</span>
+                    <span class="badge" style="background: rgba(255,255,255,0.2);">🔴 Holidays</span>
+                    <span class="badge" style="background: rgba(255,255,255,0.2);">🔵 Academic</span>
+                </div>
+            </div>
+
+            <div class="timeline-container fade-in" id="schedule-list">
+                <!-- Injected via JS -->
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.getElementById('schedule-list');
+            window.StudentData.academicSchedule.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `timeline-item type-${item.type}`;
+                div.innerHTML = `
+                    <div class="timeline-dot"></div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                        ${new Date(item.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+                    </div>
+                    <h3 style="margin-top: 0.5rem; font-size: 1.25rem;">${item.event}</h3>
+                    <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
+                        <span class="badge" style="background: rgba(0,0,0,0.05);">${item.type}</span>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        });
+    </script>
+</body>
+
+</html>

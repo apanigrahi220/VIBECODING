@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable | Student Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .timetable-grid {
+            display: grid;
+            grid-template-columns: 100px repeat(5, 1fr);
+            gap: 1px;
+            background: #eee;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tt-cell {
+            background: white;
+            padding: var(--space-sm);
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .tt-header {
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            align-items: center;
+        }
+
+        .tt-time {
+            font-weight: 600;
+            color: var(--text-muted);
+            align-items: center;
+            border-right: 1px solid #eee;
+        }
+
+        .tt-subject {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .tt-room {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar injected -->
+        <main class="main-content">
+            <!-- Header injected -->
+
+            <h2 class="fade-in">Weekly Timetable</h2>
+
+            <div class="card fade-in" style="margin-top: var(--space-md); overflow-x: auto;">
+                <div style="min-width: 800px;">
+                    <div class="timetable-grid">
+                        <!-- Header Row -->
+                        <div class="tt-cell tt-header">Time</div>
+                        <div class="tt-cell tt-header">Mon</div>
+                        <div class="tt-cell tt-header">Tue</div>
+                        <div class="tt-cell tt-header">Wed</div>
+                        <div class="tt-cell tt-header">Thu</div>
+                        <div class="tt-cell tt-header">Fri</div>
+
+                        <!-- 9:00 AM -->
+                        <div class="tt-cell tt-time">09:00 AM</div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">CS101</div>
+                            <div class="tt-room">Room 301</div>
+                        </div>
+                        <div class="tt-cell"></div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">MA104</div>
+                            <div class="tt-room">Room 202</div>
+                        </div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">CS102</div>
+                            <div class="tt-room">Lab 1</div>
+                        </div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">CS101</div>
+                            <div class="tt-room">Room 301</div>
+                        </div>
+
+                        <!-- 10:30 AM -->
+                        <div class="tt-cell tt-time">10:30 AM</div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">ma104</div>
+                            <div class="tt-room">Room 202</div>
+                        </div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">CS103</div>
+                            <div class="tt-room">Room 105</div>
+                        </div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">CS101</div>
+                            <div class="tt-room">Room 301</div>
+                        </div>
+                        <div class="tt-cell"></div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">CS103</div>
+                            <div class="tt-room">Room 105</div>
+                        </div>
+
+                        <!-- 12:00 PM -->
+                        <div class="tt-cell tt-time" style="background:#fafafa;">12:00 PM</div>
+                        <div class="tt-cell"
+                            style="grid-column: span 5; background:#fafafa; text-align:center; align-items:center;">
+                            <span class="badge badge-yellow">LUNCH BREAK</span>
+                        </div>
+
+                        <!-- 01:00 PM -->
+                        <div class="tt-cell tt-time">01:00 PM</div>
+                        <div class="tt-cell"></div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">CS104</div>
+                            <div class="tt-room">Lab 2</div>
+                        </div>
+                        <div class="tt-cell"></div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">MA104</div>
+                            <div class="tt-room">Room 202</div>
+                        </div>
+                        <div class="tt-cell">
+                            <div class="tt-subject">CS104</div>
+                            <div class="tt-room">Lab 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
